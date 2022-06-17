@@ -1,0 +1,15 @@
+﻿<Window x:Class="CertRenamer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CertRenamer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="447" Width="525">
+    <Grid>
+        <TextBox x:Name="txtgozat" Height="20" Margin="10,10,120,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="btngozat" Content="Button" Margin="0,10,10,0" Click="Button_Click" HorizontalAlignment="Right" Width="103" Height="20" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dg" HorizontalAlignment="Left" Height="145" Margin="12,35,0,0" VerticalAlignment="Top" Width="495"/>
+
+    </Grid>
+</Window>

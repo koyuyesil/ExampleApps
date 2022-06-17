@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Methods", "Methods\Methods.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUygulamasi", "WPFUygulamasi\WPFUygulamasi.csproj", "{CC3C8733-B2F1-4A56-9026-AB807F0F517B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertRenamer", "CertRenamer\CertRenamer.csproj", "{7B87CEC7-7415-4581-8D14-CD70990E41B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{CC3C8733-B2F1-4A56-9026-AB807F0F517B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC3C8733-B2F1-4A56-9026-AB807F0F517B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC3C8733-B2F1-4A56-9026-AB807F0F517B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B87CEC7-7415-4581-8D14-CD70990E41B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B87CEC7-7415-4581-8D14-CD70990E41B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B87CEC7-7415-4581-8D14-CD70990E41B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B87CEC7-7415-4581-8D14-CD70990E41B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
