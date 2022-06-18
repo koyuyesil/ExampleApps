@@ -1,0 +1,25 @@
+﻿<Window x:Class="LicensingGenetator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LicensingGenetator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="381" Width="541">
+    <Grid>
+        <Label Content="PassPhrase" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Full Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="E-Mail" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label Content="Modules" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Public Key" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="pwdBox" Margin="132,14,33,0" VerticalAlignment="Top" InputScope="Password"/>
+        <TextBox x:Name="tbxFullName" Margin="132,45,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="PersonalFullName"/>
+        <TextBox x:Name="tbxEmail" Margin="132,76,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="EmailUserName"/>
+        <CheckBox x:Name="cbxQualcomm" Content="Qualcomm Module" HorizontalAlignment="Left" Margin="132,108,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxMediatek" Content="Mediatek Module" HorizontalAlignment="Left" Margin="275,108,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbxRepair" Content="Repair Module" HorizontalAlignment="Left" Margin="411,108,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxPublicKey" HorizontalAlignment="Left" Margin="132,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="134"/>
+        <Button x:Name="btnGenerateLicence" Content="Generate License File" HorizontalAlignment="Left" Margin="132,277,0,0" VerticalAlignment="Top" Height="47" Width="376" Click="btnGenerateLicence_Click"/>
+
+    </Grid>
+</Window>
