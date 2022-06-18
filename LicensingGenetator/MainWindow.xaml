@@ -12,9 +12,9 @@
         <Label Content="E-Mail" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <Label Content="Modules" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
         <Label Content="Public Key" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="pwdBox" Margin="132,14,33,0" VerticalAlignment="Top" InputScope="Password"/>
-        <TextBox x:Name="tbxFullName" Margin="132,45,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="PersonalFullName"/>
-        <TextBox x:Name="tbxEmail" Margin="132,76,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="EmailUserName"/>
+        <PasswordBox x:Name="pwdBox" Margin="132,14,33,0" VerticalAlignment="Top" InputScope="Password" Password="defaultapp"/>
+        <TextBox x:Name="tbxFullName" Margin="132,45,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="PersonalFullName" Text="Test User"/>
+        <TextBox x:Name="tbxEmail" Margin="132,76,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="EmailUserName" Text="test@e.mail"/>
         <CheckBox x:Name="cbxQualcomm" Content="Qualcomm Module" Margin="132,108,287,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbxMediatek" Content="Mediatek Module" Margin="275,108,152,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbxRepair" Content="Repair Module" Margin="411,108,33,0" VerticalAlignment="Top"/>
