@@ -1,7 +1,8 @@
 using Microsoft.Extensions.Hosting;
 namespace WebsiteStatusCheckerWorker
 {
-
+    //https://www.youtube.com/watch?v=PzrTiz_NRKA
+    //host ile worker larý birleþtirip istemci yaz 
     public class Worker : BackgroundService
     {
         //default
