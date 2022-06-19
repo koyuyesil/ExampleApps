@@ -1,2 +1,2 @@
-# BasitKonsolUygulamalari
-Wisual Studio 2022 Updated
+# Basit Uygulamalar
+Visual Studio 2022 Updated
