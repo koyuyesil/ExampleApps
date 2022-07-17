@@ -25,9 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicensingGenetator", "Licen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicensingActivation", "LicensingActivation\LicensingActivation.csproj", "{1A42A239-46C7-4645-830E-C171B72CD039}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFUygulamasiNET6", "WPFUygulamasiNET6\WPFUygulamasiNET6.csproj", "{250D17D6-4E15-472C-9161-3B3ADAE98C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFUygulamasiNET6", "WPFUygulamasiNET6\WPFUygulamasiNET6.csproj", "{250D17D6-4E15-472C-9161-3B3ADAE98C58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPApp", "UWPApp\UWPApp.csproj", "{7C11B1AA-0792-4B5C-B40D-E98D912A1398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solutions", "Solutions", "{300D4F87-C88B-447F-AFC6-B685F6C60835}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SockMerchant", "SockMerchant\SockMerchant.csproj", "{DD642230-1822-44DD-94E0-99380951530A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -313,9 +317,32 @@ Global
 		{7C11B1AA-0792-4B5C-B40D-E98D912A1398}.Release|x86.ActiveCfg = Release|x86
 		{7C11B1AA-0792-4B5C-B40D-E98D912A1398}.Release|x86.Build.0 = Release|x86
 		{7C11B1AA-0792-4B5C-B40D-E98D912A1398}.Release|x86.Deploy.0 = Release|x86
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|x64.Build.0 = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Debug|x86.Build.0 = Debug|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|ARM.Build.0 = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|ARM64.Build.0 = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|x64.ActiveCfg = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|x64.Build.0 = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD642230-1822-44DD-94E0-99380951530A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD642230-1822-44DD-94E0-99380951530A} = {300D4F87-C88B-447F-AFC6-B685F6C60835}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9B5CF73-DAD5-431C-8D06-13D5EE0EA755}
