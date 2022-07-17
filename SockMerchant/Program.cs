@@ -28,7 +28,7 @@ namespace SockMerchant
         }
         static void Main(string[] args)
         {
-            
+            Console.WriteLine("Sock Merchant");
             var ar_temp = Console.ReadLine().Split(' ');
             var ar = Array.ConvertAll(ar_temp, Int32.Parse);
             var result = sockMerchant(ar);
