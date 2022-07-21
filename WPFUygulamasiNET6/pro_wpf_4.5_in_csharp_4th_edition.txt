@@ -1,0 +1,28 @@
+Do you mean Delegate.Invoke/BeginInvoke or Control.Invoke/BeginInvoke?
+
+Delegate.Invoke: Executes synchronously, on the same thread.
+Delegate.BeginInvoke: Executes asynchronously, on a threadpool thread.
+Control.Invoke: Executes on the UI thread, but calling thread waits for completion before continuing.
+Control.BeginInvoke: Executes on the UI thread, and calling thread doesn't wait for completion.
+Tim's answer mentions when you might want to use BeginInvoke - although it was mostly geared towards Delegate.BeginInvoke, I suspect.
+
+For Windows Forms apps, I would suggest that you should usually use BeginInvoke. That way you don't need to worry about deadlock, for example - but you need to understand that the UI may not have been updated by the time you next look at it! In particular, you shouldn't modify data which the UI thread might be about to use for display purposes. For example, if you have a Person with FirstName and LastName properties, and you did:
+
+person.FirstName = "Kevin"; // person is a shared reference
+person.LastName = "Spacey";
+control.BeginInvoke(UpdateName);
+person.FirstName = "Keyser";
+person.LastName = "Soze";
+Then the UI may well end up displaying "Keyser Spacey". (There's an outside chance it could display "Kevin Soze" but only through the weirdness of the memory model.)
+
+Unless you have this sort of issue, however, Control.BeginInvoke is easier to get right, and will avoid your background thread from having to wait for no good reason. Note that the Windows Forms team has guaranteed that you can use Control.BeginInvoke in a "fire and forget" manner - i.e. without ever calling EndInvoke. This is not true of async calls in general: normally every BeginXXX should have a corresponding EndXXX call, usually in the callback.
+
+
+The difference between Control.Invoke() and Control.BeginInvoke() is,
+
+BeginInvoke() will schedule the asynchronous action on the GUI thread. When the asynchronous action is scheduled, your code continues. Some time later (you don't know exactly when) your asynchronous action will be executed
+Invoke() will execute your asynchronous action (on the GUI thread) and wait until your action has completed.
+A logical conclusion is that a delegate you pass to Invoke() can have out-parameters or a return-value, while a delegate you pass to BeginInvoke() cannot (you have to use EndInvoke to retrieve the results).
+
+
+CHAPTER 31
