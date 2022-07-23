@@ -12,6 +12,7 @@ namespace CmdLineSniffer
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            
             //var logPath = AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.FriendlyName + "Log.txt";
             //var exePath = AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.FriendlyName + "Org.exe";
             var logPath = Environment.CurrentDirectory + "\\" + Path.GetFileNameWithoutExtension(Environment.ProcessPath) + "Log.txt";
@@ -19,7 +20,7 @@ namespace CmdLineSniffer
             var s1 = Path.GetFileNameWithoutExtension(Environment.ProcessPath);
             var s2 = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var s3 = Environment.CurrentDirectory + "\\" + Process.GetCurrentProcess().ProcessName;
-
+            Console.WriteLine("Orjinal Dosyanın adını \"" + s1 + "Org\" olarak değiştirin");
             //runner();
             StreamWriter sw;
             // This text is added only once to the file.
@@ -45,7 +46,15 @@ namespace CmdLineSniffer
                 {
                     sw.WriteLine(string.Join(" ", args));
                     Console.WriteLine();
-                    Process.Start(exePath, args);
+                    try
+                    {
+                        Process.Start(exePath, args);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    
                 }
             }
         }
