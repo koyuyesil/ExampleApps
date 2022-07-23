@@ -15,6 +15,8 @@
         <Button x:Name="btnStop" Content="STOP" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="btnStop_Click"/>
         <ComboBox x:Name="drbxDevices" HorizontalAlignment="Left" Margin="445,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="drbxDevices_ContextMenuOpening" DropDownOpened="drbxDevices_DropDownOpened" SelectionChanged="drbxDevices_SelectionChangedAsync" >
         </ComboBox>
+        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="355,55,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="getProps" Content="Get Props." HorizontalAlignment="Left" Margin="465,79,0,0" VerticalAlignment="Top" Height="38" Width="105" Click="getProps_Click"/>
 
     </Grid>
 </Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,7 +31,7 @@ namespace WPFUygulamasiNET6
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-             
+
         {
             drbxDevices.SelectedIndex = -1;
 
@@ -40,6 +41,8 @@ namespace WPFUygulamasiNET6
         private bool isEmpty(string s)
         {
             return (s == "");
+            //devices.RemoveAll(isEmpty); ornek kullanım
+            //string tmp = adbResult.StandardOutput.Trim();
         }
         private async void deviceListing()
         {
@@ -48,14 +51,20 @@ namespace WPFUygulamasiNET6
             {
                 tbxLogs.AppendText(adbResult.StandardError);
             }
-
-            //string tmp = adbResult.StandardOutput.Trim();
+            List<Dictionary<string, string>> deviceList = new();
             List<string> devices = adbResult.StandardOutput.Split("\r\n").ToList();
-            //devices.RemoveAll(isEmpty);
             devices.RemoveAll(s => s == "");
+            devices.RemoveAt(0);
             devices.ForEach(s => tbxLogs.AppendText(s + "\r\n"));
-            devices.ForEach(s => drbxDevices.Items.Add(s));
+            devices.ForEach(s =>
+            {
+                drbxDevices.Items.Add(s);
+                var ss = s.Split("\t");
+                deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, {"Status", ss[1] } });
 
+            });
+
+            var ssss = deviceList[0]["DeviceID"];
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -95,7 +104,7 @@ namespace WPFUygulamasiNET6
         private async void drbxDevices_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
             var selected = drbxDevices.SelectedIndex;
-            if (selected != 0 && selected != -1)
+            if (selected != 0 && selected != -1)// todo 0 list of device dan dolayı kaldrıldı ama
             {
                 try
                 {
@@ -104,13 +113,41 @@ namespace WPFUygulamasiNET6
                     tbxLogs.AppendText(result.StandardOutput);
                     rbtnStatus.IsChecked = false;
                 }
-                catch (Exception DFSDF)
+                catch (Exception ex)
                 {
 
-                    tbxLogs.AppendText(DFSDF.Message);
+                    tbxLogs.AppendText(ex.Message);
                 }
-                
+
             }
+        }
+
+        private async void getProps_Click(object sender, RoutedEventArgs e)
+        {
+            var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("shell getprop").ExecuteBufferedAsync();
+            if (adbResult.ExitCode != 0)
+            {
+                tbxLogs.AppendText(adbResult.StandardError);
+            }
+            List<Dictionary<string, string>> propList = new();
+            List<string> props = adbResult.StandardOutput.Split("\r\n").ToList();
+            props.RemoveAll(s => s == "");
+            //devices.RemoveAt(0);
+            props.ForEach(s => tbxLogs.AppendText(s + "\r\n"));
+            var pattern = @"\[(.*?)\]";
+            props.ForEach(s =>
+            {              
+                var matches = Regex.Matches(s, pattern);
+                string s1 = matches[0].Groups[1].ToString();
+                string s2 = matches[1].Groups[1].ToString();
+                propList.Add(new Dictionary<string, string>() { { s1, s2 } });
+            });
+
+            
+        
+        
+            
+
         }
     }
 }
