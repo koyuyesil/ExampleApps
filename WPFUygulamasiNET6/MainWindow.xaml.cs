@@ -1,21 +1,11 @@
-﻿using System;
+﻿using CliWrap;
+using CliWrap.Buffered;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CliWrap;
-using CliWrap.Buffered;
 
 namespace WPFUygulamasiNET6
 {
@@ -148,12 +138,12 @@ namespace WPFUygulamasiNET6
         {
             progressBar.Value = slider.Value;
         }
-        #pragma warning disable IDE0051 // Kullanılmayan özel üyeleri kaldır
+#pragma warning disable IDE0051 // Kullanılmayan özel üyeleri kaldır
         private static bool IsEmpty(string s)
         {
             return (s == "");
         }
-        #pragma warning restore IDE0051 // Kullanılmayan özel üyeleri kaldır
+#pragma warning restore IDE0051 // Kullanılmayan özel üyeleri kaldır
         //devices.RemoveAll(isEmpty); ornek kullanım
         //devices.RemoveAll(s => s == "");ornek kullanım2
         //string tmp = adbResult.StandardOutput.Trim();boşları sil
