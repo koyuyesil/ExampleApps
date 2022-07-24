@@ -19,14 +19,15 @@ namespace WPFUygulamasiNET6
         {
             InitializeComponent();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
-
         {
             drbxDevices.SelectedIndex = -1;
-
             DeviceListing();
-
+        }
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
+            rbtnStatus.IsChecked = false;
         }
         private async void DeviceListing()
         {
@@ -82,8 +83,7 @@ namespace WPFUygulamasiNET6
         }
         private void DrbxDevices_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
-            // if (selected != 0 && selected != -1)// todo 0 list of device dan dolayı kaldrıldı ama
-            // rbtnStatus.IsChecked = false;
+
         }
         private void TbxLogs_Clear_Click(object sender, RoutedEventArgs e)
         {
@@ -94,22 +94,11 @@ namespace WPFUygulamasiNET6
             DeviceListing();
             rbtnStatus.IsChecked = true;
         }
-
         private async void BtnStop_Click(object sender, RoutedEventArgs e)
         {
             await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
             rbtnStatus.IsChecked = false;
         }
-
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
-            rbtnStatus.IsChecked = false;
-        }
-
-
-
-
         private async void GetProps_Click(object sender, RoutedEventArgs e)
         {
 
