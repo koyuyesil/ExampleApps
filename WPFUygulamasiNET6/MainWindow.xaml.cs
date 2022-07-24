@@ -36,18 +36,21 @@ namespace WPFUygulamasiNET6
             {
                 tbxLogs.AppendText(adbResult.StandardError + Environment.NewLine);
             }
-            List<Dictionary<string, string>> deviceList = new();
-            List<string> devices = adbResult.StandardOutput.Split(Environment.NewLine).ToList();
-            devices.RemoveAll(s => s == string.Empty);
-            devices.RemoveAt(0);
-            devices.ForEach(s => tbxLogs.AppendText(s + Environment.NewLine));
-            devices.ForEach(s =>
+            else
             {
-                drbxDevices.Items.Add(s);
-                var ss = s.Split("\t");
-                deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, { "Status", ss[1] } });
-
-            });
+                rbtnStatus.IsChecked = true;
+                List<Dictionary<string, string>> deviceList = new();
+                List<string> devices = adbResult.StandardOutput.Split(Environment.NewLine).ToList();
+                devices.RemoveAll(s => s == string.Empty);
+                devices.RemoveAt(0);
+                devices.ForEach(s => tbxLogs.AppendText(s + Environment.NewLine));
+                devices.ForEach(s =>
+                {
+                    drbxDevices.Items.Add(s);
+                    var ss = s.Split("\t");
+                    deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, { "Status", ss[1] } });
+                });
+            }
 
             //var ssss = deviceList[0]["DeviceID"];
         }
@@ -96,8 +99,19 @@ namespace WPFUygulamasiNET6
         }
         private async void BtnStop_Click(object sender, RoutedEventArgs e)
         {
-            await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
-            rbtnStatus.IsChecked = false;
+            var message = "";
+            try
+            {
+                var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
+                rbtnStatus.IsChecked = false;
+                message = result.StandardError;
+                tbxLogs.AppendText("ADB Server Killed" + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                tbxLogs.AppendText(ex.Message + message + Environment.NewLine);
+            }
+
         }
         private async void GetProps_Click(object sender, RoutedEventArgs e)
         {
