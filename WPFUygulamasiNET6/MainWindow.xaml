@@ -7,16 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <Slider x:Name="slider"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" ValueChanged="Slider_ValueChanged" Maximum="100"/>
-        <ProgressBar x:Name="progressBar"  HorizontalAlignment="Left" Height="10" Margin="10,33,0,0" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="tbxLogs" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="161"/>
-        <RadioButton x:Name="rbtnStatus" Content="" HorizontalAlignment="Left" Margin="315,48,0,0" VerticalAlignment="Top" Height="14" Width="14" ClickMode="Release"/>
-        <Button x:Name="btnStart" Content="START" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Height="30" Width="60" Click="btnStart_Click"/>
-        <Button x:Name="btnStop" Content="STOP" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="btnStop_Click"/>
-        <ComboBox x:Name="drbxDevices" HorizontalAlignment="Left" Margin="445,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="drbxDevices_ContextMenuOpening" DropDownOpened="drbxDevices_DropDownOpened" SelectionChanged="drbxDevices_SelectionChangedAsync" >
+        <Slider x:Name="slider"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="525" ValueChanged="Slider_ValueChanged" Maximum="100"/>
+        <ProgressBar x:Name="progressBar"  HorizontalAlignment="Left" Height="10" Margin="10,33,0,0" VerticalAlignment="Top" Width="525"/>
+        <TextBox x:Name="tbxLogs" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="525" Height="359" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="ApplicationCommands.Cut"/>
+                    <MenuItem Command="ApplicationCommands.Copy"/>
+                    <MenuItem Command="ApplicationCommands.Paste"/>
+                    <Separator/>
+                    <MenuItem  Header="Clear" Name="tbxMenuItemLogsClear" Click="TbxLogs_Clear_Click" />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox> 
+        <RadioButton x:Name="rbtnStatus" Content="" HorizontalAlignment="Left" Margin="635,75,0,0" VerticalAlignment="Top" Height="14" Width="14" ClickMode="Release"/>
+        <Button x:Name="btnStart" Content="START" HorizontalAlignment="Left" Margin="540,40,0,0" VerticalAlignment="Top" Height="30" Width="60" Click="BtnStart_Click"/>
+        <Button x:Name="btnStop" Content="STOP" HorizontalAlignment="Left" Margin="605,40,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="BtnStop_Click"/>
+        <ComboBox x:Name="drbxDevices" HorizontalAlignment="Left" Margin="540,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="DrbxDevices_ContextMenuOpening" DropDownOpened="DrbxDevices_DropDownOpened" SelectionChanged="DrbxDevices_SelectionChangedAsync" >
         </ComboBox>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="355,55,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="getProps" Content="Get Props." HorizontalAlignment="Left" Margin="465,79,0,0" VerticalAlignment="Top" Height="38" Width="105" Click="getProps_Click"/>
+        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="540,75,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="getProps" Content="Get Props." HorizontalAlignment="Left" Margin="670,40,0,0" VerticalAlignment="Top" Height="30" Width="120" Click="GetProps_Click"/>
 
     </Grid>
 </Window>

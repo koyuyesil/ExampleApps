@@ -35,50 +35,77 @@ namespace WPFUygulamasiNET6
         {
             drbxDevices.SelectedIndex = -1;
 
-            deviceListing();
+            DeviceListing();
 
         }
-        private bool isEmpty(string s)
-        {
-            return (s == "");
-            //devices.RemoveAll(isEmpty); ornek kullanım
-            //string tmp = adbResult.StandardOutput.Trim();
-        }
-        private async void deviceListing()
+        private async void DeviceListing()
         {
             var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("devices").ExecuteBufferedAsync();
             if (adbResult.ExitCode != 0)
             {
-                tbxLogs.AppendText(adbResult.StandardError);
+                tbxLogs.AppendText(adbResult.StandardError + Environment.NewLine);
             }
             List<Dictionary<string, string>> deviceList = new();
-            List<string> devices = adbResult.StandardOutput.Split("\r\n").ToList();
-            devices.RemoveAll(s => s == "");
+            List<string> devices = adbResult.StandardOutput.Split(Environment.NewLine).ToList();
+            devices.RemoveAll(s => s == string.Empty);
             devices.RemoveAt(0);
-            devices.ForEach(s => tbxLogs.AppendText(s + "\r\n"));
+            devices.ForEach(s => tbxLogs.AppendText(s + Environment.NewLine));
             devices.ForEach(s =>
             {
                 drbxDevices.Items.Add(s);
                 var ss = s.Split("\t");
-                deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, {"Status", ss[1] } });
+                deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, { "Status", ss[1] } });
 
             });
 
-            var ssss = deviceList[0]["DeviceID"];
+            //var ssss = deviceList[0]["DeviceID"];
         }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void DrbxDevices_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            progressBar.Value = slider.Value;
+            drbxDevices.Items.Clear();
         }
-
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        private async void DrbxDevices_DropDownOpened(object sender, EventArgs e)
         {
-            deviceListing();
+            drbxDevices.Items.Clear();
+            DeviceListing();
+            try
+            {
+                var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("reconnect offline").ExecuteBufferedAsync();
+                if (result.ExitCode != 0)
+                {
+                    tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " :" + result.StandardError + Environment.NewLine);
+                }
+                if (result.StandardOutput == Environment.NewLine)
+                {
+                    tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " : Please Enable USB Debugging" + Environment.NewLine);
+                }
+                else
+                {
+                    tbxLogs.AppendText(result.ExitTime.DateTime + " : " + result.StandardOutput);//output has new line
+                }
+
+            }
+            catch (Exception ex)
+            {
+                tbxLogs.AppendText(ex.Message + Environment.NewLine);
+            }
+        }
+        private void DrbxDevices_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
+        {
+            // if (selected != 0 && selected != -1)// todo 0 list of device dan dolayı kaldrıldı ama
+            // rbtnStatus.IsChecked = false;
+        }
+        private void TbxLogs_Clear_Click(object sender, RoutedEventArgs e)
+        {
+            tbxLogs.Clear();
+        }
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            DeviceListing();
             rbtnStatus.IsChecked = true;
         }
 
-        private async void btnStop_Click(object sender, RoutedEventArgs e)
+        private async void BtnStop_Click(object sender, RoutedEventArgs e)
         {
             await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
             rbtnStatus.IsChecked = false;
@@ -90,40 +117,12 @@ namespace WPFUygulamasiNET6
             rbtnStatus.IsChecked = false;
         }
 
-        private void drbxDevices_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+
+
+
+        private async void GetProps_Click(object sender, RoutedEventArgs e)
         {
-            drbxDevices.Items.Clear();
-        }
 
-        private void drbxDevices_DropDownOpened(object sender, EventArgs e)
-        {
-            drbxDevices.Items.Clear();
-            deviceListing();
-        }
-
-        private async void drbxDevices_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = drbxDevices.SelectedIndex;
-            if (selected != 0 && selected != -1)// todo 0 list of device dan dolayı kaldrıldı ama
-            {
-                try
-                {
-                    var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("reboot").ExecuteBufferedAsync();
-                    tbxLogs.Text = result.StandardError;
-                    tbxLogs.AppendText(result.StandardOutput);
-                    rbtnStatus.IsChecked = false;
-                }
-                catch (Exception ex)
-                {
-
-                    tbxLogs.AppendText(ex.Message);
-                }
-
-            }
-        }
-
-        private async void getProps_Click(object sender, RoutedEventArgs e)
-        {
             var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("shell getprop").ExecuteBufferedAsync();
             if (adbResult.ExitCode != 0)
             {
@@ -136,18 +135,31 @@ namespace WPFUygulamasiNET6
             props.ForEach(s => tbxLogs.AppendText(s + "\r\n"));
             var pattern = @"\[(.*?)\]";
             props.ForEach(s =>
-            {              
+            {
                 var matches = Regex.Matches(s, pattern);
                 string s1 = matches[0].Groups[1].ToString();
                 string s2 = matches[1].Groups[1].ToString();
                 propList.Add(new Dictionary<string, string>() { { s1, s2 } });
             });
 
-            
-        
-        
-            
-
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            progressBar.Value = slider.Value;
+        }
+        #pragma warning disable IDE0051 // Kullanılmayan özel üyeleri kaldır
+        private static bool IsEmpty(string s)
+        {
+            return (s == "");
+        }
+        #pragma warning restore IDE0051 // Kullanılmayan özel üyeleri kaldır
+        //devices.RemoveAll(isEmpty); ornek kullanım
+        //devices.RemoveAll(s => s == "");ornek kullanım2
+        //string tmp = adbResult.StandardOutput.Trim();boşları sil
+        //if (tbxLogs.Text != string.Empty)
+        //{
+        //// tbxLogs.Text += Environment.NewLine;
+        //}
     }
 }

@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>True</UseWPF>
-    <UseWindowsForms>False</UseWindowsForms>
+    <UseWindowsForms>True</UseWindowsForms>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
