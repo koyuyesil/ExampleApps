@@ -124,7 +124,7 @@ namespace WPFUygulamasiNET6
             List<Dictionary<string, string>> propList = new();
             List<string> props = adbResult.StandardOutput.Split("\r\n").ToList();
             props.RemoveAll(s => s == "");
-            //devices.RemoveAt(0);
+            //devices.RemoveAt(0);//listofdevices string
             props.ForEach(s => tbxLogs.AppendText(s + "\r\n"));
             var pattern = @"\[(.*?)\]";
             props.ForEach(s =>
