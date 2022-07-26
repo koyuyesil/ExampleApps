@@ -43,8 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICommand.cs" />
+    <Compile Include="NextChannel.cs" />
+    <Compile Include="PreviousChannel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Switch.cs" />
+    <Compile Include="SwitchOnOff.cs" />
+    <Compile Include="Television.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

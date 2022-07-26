@@ -55,123 +55,15 @@ public class Menu
             {
                 s = int.Parse(Console.ReadLine());
                 commands[s].Execute();
-                Thread.Sleep(5000);
-                //Task.Delay(5000);//await için
+                Thread.Sleep(2000);
+                //Task.Delay(2000);//await için
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(e.Message);
+                Thread.Sleep(2000);
             }
         }
 
-    }
-}
-
-
-public class Switch
-{
-    private int sw;
-    public Switch()
-    {
-        sw = 0;
-    }
-    public void SwitchOn()
-    {
-        sw = 1;
-    }
-    public void SwitchOff()
-    {
-        sw = 0;
-    }
-    public int SwitchStatus() { return sw; }
-}
-
-
-public class Television
-{
-    private int channel;
-    public Television()
-    {
-        channel = 1;
-    }
-    public void NextChannel()
-    {
-        channel++;
-    }
-    public void PreviousChannel()
-    {
-        channel--;
-    }
-    public int CurrentChannel() { return channel; }
-}
-
-public interface ICommand
-{
-    void Execute();
-}
-
-
-
-public class SwitchOnOff : ICommand
-{
-    Switch lamba;
-    public SwitchOnOff(Switch l)
-    {
-        lamba = l;
-    }
-    public void Execute()
-    {
-        if (lamba.SwitchStatus() == 1)
-        {
-            lamba.SwitchOff();
-            Console.WriteLine("Switch is off.");
-        }
-        else
-        {
-            lamba.SwitchOn();
-            Console.WriteLine("Switch is on.");
-        }
-    }
-    public override string ToString()
-    {
-        if (lamba.SwitchStatus() == 1) return "Turn off switch.";
-        else return "Turn on switch";
-    }
-}
-
-public class PreviousChannel : ICommand
-{
-    Television tv;
-    public PreviousChannel(Television t)
-    {
-        tv = t;
-    }
-    public void Execute()
-    {
-        tv.PreviousChannel();
-        Console.WriteLine("Current Channel:" + tv.CurrentChannel());
-    }
-    public override string ToString()
-    {
-        return "Previous Channel";
-    }
-}
-
-
-public class NextChannel : ICommand
-{
-    Television tv;
-    public NextChannel(Television t)
-    {
-        tv = t;
-    }
-    public void Execute()
-    {
-        tv.NextChannel();
-        Console.WriteLine("Current Channel:" + tv.CurrentChannel());
-    }
-    public override string ToString()
-    {
-        return "Next Channel";
     }
 }
