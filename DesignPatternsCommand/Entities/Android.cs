@@ -41,7 +41,7 @@ namespace DesignPatternsCommand.Entities
             {
             //double unitVoltage = 4450 - 3870;
             //double unitVoltage = 4000 - 3600;
-            double unitVoltage = 4000 - 3600;
+            double unitVoltage = 4433 - 3600;//real
             unitVoltage = unitVoltage / 100;
             double diffVoltage = double.Parse(currentVoltage) - 3600;
             double res = diffVoltage / unitVoltage;
