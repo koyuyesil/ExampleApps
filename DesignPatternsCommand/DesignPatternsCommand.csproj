@@ -90,15 +90,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\GetVariables.cs" />
+    <Compile Include="Commands\Mobile\FastbootGetVariables.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\NextChannel.cs" />
-    <Compile Include="Commands\PreviousChannel.cs" />
+    <Compile Include="Commands\Mobile\FastbootReboot.cs" />
+    <Compile Include="Commands\PatternDefault\NextChannel.cs" />
+    <Compile Include="Commands\PatternDefault\PreviousChannel.cs" />
     <Compile Include="Entities\Android.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Switch.cs" />
-    <Compile Include="Commands\SwitchOnOff.cs" />
+    <Compile Include="Commands\PatternDefault\SwitchOnOff.cs" />
     <Compile Include="Entities\Television.cs" />
   </ItemGroup>
   <ItemGroup>

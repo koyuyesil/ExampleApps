@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
@@ -19,7 +20,8 @@ namespace ConsoleApp1
          private static void Method()
         {
             Console.WriteLine("1");
-            Task.Delay(1000);
+            Task.Delay(1000);//async
+            Thread.Sleep(3000);//sync
             Console.WriteLine("2");
             Task.Delay(1000);
             Console.WriteLine("3");

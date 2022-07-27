@@ -21,13 +21,15 @@ namespace DesignPatternsCommand
             NextChannel cmd_next_ch = new NextChannel(tv);
 
             Android dev = new Android();
-            GetVariables getVariables = new GetVariables(dev);
+            FastbootGetVariables getVariables = new FastbootGetVariables(dev);
+            FastbootReboot reboot = new FastbootReboot(dev);
 
 
             m.AddCommand(cmd_switch);
             m.AddCommand(cmd_prev_ch);
             m.AddCommand(cmd_next_ch);
             m.AddCommand(getVariables);
+            m.AddCommand(reboot);
             m.CreateMenu();
         }
     }

@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DesignPatternsCommand.Entities
 {
@@ -74,9 +76,22 @@ namespace DesignPatternsCommand.Entities
             //});
         }
 
-        public void Reboot()
+        public async void Reboot()
         {
+            try
+            {
+                var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                var fastboot = await Cli.Wrap(targetFilePath: "fastboot").WithArguments("reboot bootloader").WithWorkingDirectory(path).ExecuteBufferedAsync();
+                var currentVoltage = fastboot.StandardOutput;
+                Console.WriteLine(DateTime.Now.ToLongTimeString()+" : Reboot Bootloader Started");
+                Thread.Sleep(10000);
+                Console.WriteLine(DateTime.Now.ToLongTimeString() + " : Reboot Bootloader Finished");//result bolean olacak. command için
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void RebootRecovery()

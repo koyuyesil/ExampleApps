@@ -3,10 +3,10 @@ using System;
 
 namespace DesignPatternsCommand.Commands
 {
-    public class GetVariables : ICommand
+    public class FastbootGetVariables : ICommand
     {
         Android device;
-        public GetVariables(Android dev)
+        public FastbootGetVariables(Android dev)
         {
             device = dev;
         }
