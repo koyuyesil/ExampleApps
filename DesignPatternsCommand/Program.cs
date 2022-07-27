@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DesignPatternsCommand.Commands;
+using DesignPatternsCommand.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +15,19 @@ namespace DesignPatternsCommand
         {
             Menu m = new Menu();
             SwitchOnOff cmd_switch = new SwitchOnOff(new Switch());
-            Television tv = new Television();
+
+            Television tv = new Television();       
             PreviousChannel cmd_prev_ch = new PreviousChannel(tv);
             NextChannel cmd_next_ch = new NextChannel(tv);
+
+            Android dev = new Android();
+            GetVariables getVariables = new GetVariables(dev);
+
+
             m.AddCommand(cmd_switch);
             m.AddCommand(cmd_prev_ch);
             m.AddCommand(cmd_next_ch);
+            m.AddCommand(getVariables);
             m.CreateMenu();
         }
     }
