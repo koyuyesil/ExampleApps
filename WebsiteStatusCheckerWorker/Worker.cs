@@ -1,4 +1,7 @@
 using Microsoft.Extensions.Hosting;
+using System.Net.Http.Headers;
+using System.Reflection;
+
 namespace WebsiteStatusCheckerWorker
 {
     //https://www.youtube.com/watch?v=PzrTiz_NRKA
@@ -8,16 +11,20 @@ namespace WebsiteStatusCheckerWorker
         //default
         private readonly ILogger<Worker> _logger;
         //added
-        private HttpClient _httpClient;
+        private HttpClient httpClient;
+
         public Worker(ILogger<Worker> logger)
         {
             _logger = logger;
-            _httpClient = new HttpClient();
+            httpClient = new HttpClient();
+            ProductHeaderValue header = new ProductHeaderValue(("MyAwesomeLibrary"), Assembly.GetExecutingAssembly().GetName().Version?.ToString());
+            ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue(header);
+            httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            _httpClient = new HttpClient();
+
             _logger.LogInformation("{time}: Nebula Qr Hizmeti Baþlatýldý.", DateTimeOffset.Now);
             return base.StartAsync(cancellationToken);
         }
@@ -25,7 +32,7 @@ namespace WebsiteStatusCheckerWorker
         {
             _logger.LogWarning("{time}: Worker service stopping.", DateTimeOffset.Now);
             _logger.LogInformation("{time}: Nebula Qr Hizmeti Sonlandýrýlýyor... ", DateTimeOffset.Now);
-            _httpClient.Dispose();
+            httpClient.Dispose();
             _logger.LogWarning("{time}: Worker service stopped.", DateTimeOffset.Now);
             _logger.LogInformation("{time}: Nebula Qr Hizmeti Durduruldu.", DateTimeOffset.Now);
             return base.StopAsync(cancellationToken);
@@ -34,7 +41,11 @@ namespace WebsiteStatusCheckerWorker
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                var result = await _httpClient.GetAsync("http://anitr.net");
+                var result = await httpClient.GetAsync("http://anitr.net");
+                var result2 = await httpClient.GetStringAsync("http://aerospace.com.tr");
+                var a = result.Content.ReadAsStringAsync();
+                var b = httpClient.DefaultRequestHeaders.UserAgent.ToString();
+
 
                 if (result.IsSuccessStatusCode)
                 {
