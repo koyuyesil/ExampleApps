@@ -64,7 +64,7 @@ namespace WPFUygulamasiNET6
             DeviceListing();
             try
             {
-                var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("reconnect offline").ExecuteBufferedAsync();
+                var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("reconnect offline").ExecuteBufferedAsync();//offline ve unauthorized aygıtları zorlar
                 if (result.ExitCode != 0)
                 {
                     tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " :" + result.StandardError + Environment.NewLine);

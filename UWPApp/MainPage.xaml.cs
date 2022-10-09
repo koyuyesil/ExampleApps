@@ -28,7 +28,7 @@ namespace UWPApp
             this.InitializeComponent();
             Console.Beep();
             Method();
-            Console.Beep();
+            Console.Beep();//çalışmaz
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
