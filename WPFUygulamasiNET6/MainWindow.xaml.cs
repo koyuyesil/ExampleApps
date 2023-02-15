@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace WPFUygulamasiNET6
 {
@@ -26,12 +27,14 @@ namespace WPFUygulamasiNET6
         }
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
-            rbtnStatus.IsChecked = false;
+            var result = await Cli.Wrap("adb").WithArguments("kill-server").ExecuteBufferedAsync();
+            tbxLogs.AppendText("INFO : " + result.ExitTime.DateTime + " : ADB Server Killed" + Environment.NewLine);
         }
         private async void DeviceListing()
         {
+            tbxLogs.AppendText("INFO : " + DateTime.Now + " : ADB Başlatılıyor...");
             var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("devices").ExecuteBufferedAsync();
+            tbxLogs.AppendText(" :OK" + Environment.NewLine);
             if (adbResult.ExitCode != 0)
             {
                 tbxLogs.AppendText(adbResult.StandardError + Environment.NewLine);
@@ -99,23 +102,21 @@ namespace WPFUygulamasiNET6
         }
         private async void BtnStop_Click(object sender, RoutedEventArgs e)
         {
-            var message = "";
             try
             {
                 var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("kill-server").ExecuteBufferedAsync();
                 rbtnStatus.IsChecked = false;
-                message = result.StandardError;
-                tbxLogs.AppendText("ADB Server Killed" + Environment.NewLine);
+                tbxLogs.AppendText("INFO : " + result.ExitTime.DateTime + " : ADB Server Killed" + Environment.NewLine);
             }
             catch (Exception ex)
             {
-                tbxLogs.AppendText(ex.Message + message + Environment.NewLine);
+                tbxLogs.AppendText("ERROR : " + DateTime.Now + " : " + ex.Message + Environment.NewLine);
             }
 
         }
         private async void GetProps_Click(object sender, RoutedEventArgs e)
         {
-
+            //TRY CATCH
             var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("shell getprop").ExecuteBufferedAsync();
             if (adbResult.ExitCode != 0)
             {

@@ -20,12 +20,12 @@
                 </ContextMenu>
             </TextBox.ContextMenu>
         </TextBox> 
-        <RadioButton x:Name="rbtnStatus" Content="" HorizontalAlignment="Left" Margin="635,75,0,0" VerticalAlignment="Top" Height="14" Width="14" ClickMode="Release"/>
+        <RadioButton x:Name="rbtnStatus" Content="OFF" HorizontalAlignment="Left" Margin="540,95,0,0" VerticalAlignment="Top" Height="14" Width="60" ClickMode="Release"/>
         <Button x:Name="btnStart" Content="START" HorizontalAlignment="Left" Margin="540,40,0,0" VerticalAlignment="Top" Height="30" Width="60" Click="BtnStart_Click"/>
         <Button x:Name="btnStop" Content="STOP" HorizontalAlignment="Left" Margin="605,40,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="BtnStop_Click"/>
         <ComboBox x:Name="drbxDevices" HorizontalAlignment="Left" Margin="540,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="DrbxDevices_ContextMenuOpening" DropDownOpened="DrbxDevices_DropDownOpened" SelectionChanged="DrbxDevices_SelectionChangedAsync" >
         </ComboBox>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="540,75,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbtnOn" Content="ON" HorizontalAlignment="Left" Margin="540,75,0,0" VerticalAlignment="Top" Width="60"/>
         <Button x:Name="getProps" Content="Get Props." HorizontalAlignment="Left" Margin="670,40,0,0" VerticalAlignment="Top" Height="30" Width="120" Click="GetProps_Click"/>
 
     </Grid>

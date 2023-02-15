@@ -26,7 +26,7 @@ namespace SimpleHostWindows
                     ipString = address.ToString();
                 }
             }
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ipString), 1234);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ipString), 12345);
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             Console.WriteLine(@"Started listening requests at: {0}:{1}", ep.Address, ep.Port);
