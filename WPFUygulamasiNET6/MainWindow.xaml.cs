@@ -142,12 +142,11 @@ namespace WPFUygulamasiNET6
         {
             progressBar.Value = slider.Value;
         }
-#pragma warning disable IDE0051 // Kullanılmayan özel üyeleri kaldır
-        private static bool IsEmpty(string s)
-        {
-            return (s == "");
-        }
-#pragma warning restore IDE0051 // Kullanılmayan özel üyeleri kaldır
+
+        //private static bool IsEmpty(string s)
+        //{
+        //    return s == "";
+        //}
         //devices.RemoveAll(isEmpty); ornek kullanım
         //devices.RemoveAll(s => s == "");ornek kullanım2
         //string tmp = adbResult.StandardOutput.Trim();boşları sil
