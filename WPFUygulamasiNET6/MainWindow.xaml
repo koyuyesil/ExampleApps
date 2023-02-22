@@ -9,24 +9,31 @@
     <Grid>
         <Slider x:Name="slider"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="525" ValueChanged="Slider_ValueChanged" Maximum="100"/>
         <ProgressBar x:Name="progressBar"  HorizontalAlignment="Left" Height="10" Margin="10,33,0,0" VerticalAlignment="Top" Width="525"/>
-        <TextBox x:Name="tbxLogs" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="525" Height="359" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+        <TextBox x:Name="tbxLogs" HorizontalAlignment="Left" Margin="10,48,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="525" Height="169" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
             <TextBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="ApplicationCommands.Cut"/>
                     <MenuItem Command="ApplicationCommands.Copy"/>
                     <MenuItem Command="ApplicationCommands.Paste"/>
                     <Separator/>
-                    <MenuItem  Header="Clear" Name="tbxMenuItemLogsClear" Click="TbxLogs_Clear_Click" />
+                    <MenuItem  Header="Clear" Name="tbxMenuItemLogsClear" Click="tbxMenuItemLogsClear_Click" />
                 </ContextMenu>
             </TextBox.ContextMenu>
-        </TextBox> 
+        </TextBox>
         <RadioButton x:Name="rbtnStatus" Content="OFF" HorizontalAlignment="Left" Margin="540,95,0,0" VerticalAlignment="Top" Height="14" Width="60" ClickMode="Release"/>
         <Button x:Name="btnStart" Content="START" HorizontalAlignment="Left" Margin="540,40,0,0" VerticalAlignment="Top" Height="30" Width="60" Click="BtnStart_Click"/>
         <Button x:Name="btnStop" Content="STOP" HorizontalAlignment="Left" Margin="605,40,0,0" VerticalAlignment="Top" Width="60" Height="30" Click="BtnStop_Click"/>
-        <ComboBox x:Name="drbxDevices" HorizontalAlignment="Left" Margin="540,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="DrbxDevices_ContextMenuOpening" DropDownOpened="DrbxDevices_DropDownOpened" SelectionChanged="DrbxDevices_SelectionChangedAsync" >
-        </ComboBox>
+        <ComboBox x:Name="cmbDevices" HorizontalAlignment="Left" Margin="540,12,0,0" VerticalAlignment="Top" Width="250" ContextMenuOpening="cmbDevices_ContextMenuOpening" DropDownOpened="cmbDevices_DropDownOpened" />
         <RadioButton x:Name="rbtnOn" Content="ON" HorizontalAlignment="Left" Margin="540,75,0,0" VerticalAlignment="Top" Width="60"/>
         <Button x:Name="getProps" Content="Get Props." HorizontalAlignment="Left" Margin="670,40,0,0" VerticalAlignment="Top" Height="30" Width="120" Click="GetProps_Click"/>
+        <RichTextBox x:Name="logBox" Margin="10,222,265,10">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="540,222,0,0" VerticalAlignment="Top" Height="30" Width="60" Click="Button_ClickAsync"/>
 
     </Grid>
 </Window>

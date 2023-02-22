@@ -1,15 +1,53 @@
 ﻿using CliWrap;
 using CliWrap.Buffered;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace WPFUygulamasiNET6
 {
+    public class CommandInvoker
+    {
+        private readonly List<ICommand> _commands;
+        System.Windows.Controls.RichTextBox _richTextBox;
+
+        public CommandInvoker(System.Windows.Controls.RichTextBox logBox)
+        {
+            _commands = new List<ICommand>();
+            _richTextBox = logBox;
+        }
+
+        public void AddCommand(ICommand command)
+        {
+            _commands.Add(command);
+        }
+
+        public async Task RunAsync()
+        {
+            foreach (var command in _commands)
+            {
+             var result  = await command.ExecuteAsync();
+                Serilog.Log.Information("Komut çıktısı: {Output}", result);
+                var message = new Paragraph();
+                message.Inlines.Add(new Run(result));
+
+                var brush = new SolidColorBrush(Colors.Green);
+                message.Foreground = brush;
+                _richTextBox.Document.Blocks.Add(message);
+            }
+            
+            _richTextBox.ScrollToEnd();
+
+        }
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -19,10 +57,14 @@ namespace WPFUygulamasiNET6
         public MainWindow()
         {
             InitializeComponent();
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            drbxDevices.SelectedIndex = -1;
+            cmbDevices.SelectedIndex = -1;
             DeviceListing();
         }
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -49,7 +91,7 @@ namespace WPFUygulamasiNET6
                 devices.ForEach(s => tbxLogs.AppendText(s + Environment.NewLine));
                 devices.ForEach(s =>
                 {
-                    drbxDevices.Items.Add(s);
+                    cmbDevices.Items.Add(s);
                     var ss = s.Split("\t");
                     deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, { "Status", ss[1] } });
                 });
@@ -57,13 +99,13 @@ namespace WPFUygulamasiNET6
 
             //var ssss = deviceList[0]["DeviceID"];
         }
-        private void DrbxDevices_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        private void cmbDevices_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            drbxDevices.Items.Clear();
+            cmbDevices.Items.Clear();
         }
-        private async void DrbxDevices_DropDownOpened(object sender, EventArgs e)
+        private async void cmbDevices_DropDownOpened(object sender, EventArgs e)
         {
-            drbxDevices.Items.Clear();
+            cmbDevices.Items.Clear();
             DeviceListing();
             try
             {
@@ -87,11 +129,7 @@ namespace WPFUygulamasiNET6
                 tbxLogs.AppendText(ex.Message + Environment.NewLine);
             }
         }
-        private void DrbxDevices_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void TbxLogs_Clear_Click(object sender, RoutedEventArgs e)
+        private void tbxMenuItemLogsClear_Click(object sender, RoutedEventArgs e)
         {
             tbxLogs.Clear();
         }
@@ -137,11 +175,23 @@ namespace WPFUygulamasiNET6
             });
 
         }
-
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             progressBar.Value = slider.Value;
         }
+
+        private async void Button_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            var invoker = new CommandInvoker(logBox);
+            invoker.AddCommand(new Command("adb","devices"));
+            invoker.AddCommand(new Command("adb","getprop product"));
+            invoker.AddCommand(new Command("adb","shell dumpsys battery"));
+            await invoker.RunAsync();
+        }
+
+
+
+
 
         //private static bool IsEmpty(string s)
         //{
