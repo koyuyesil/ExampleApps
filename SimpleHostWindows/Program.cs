@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using TextCopy;
-
+//bu winexe ve net 6.0 consol olsa exe olur. diğeri ise net 4.8 ile konsol uygulaması
 namespace SimpleHostWindows
 {
     internal class Program

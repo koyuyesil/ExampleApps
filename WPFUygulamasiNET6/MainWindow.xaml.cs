@@ -3,7 +3,9 @@ using CliWrap.Buffered;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +23,7 @@ namespace WPFUygulamasiNET6
 
         public CommandInvoker(System.Windows.Controls.RichTextBox logBox)
         {
+            
             _commands = new List<ICommand>();
             _richTextBox = logBox;
         }
@@ -38,12 +41,10 @@ namespace WPFUygulamasiNET6
                 Serilog.Log.Information("Komut çıktısı: {Output}", result);
                 var message = new Paragraph();
                 message.Inlines.Add(new Run(result));
-
                 var brush = new SolidColorBrush(Colors.Green);
                 message.Foreground = brush;
                 _richTextBox.Document.Blocks.Add(message);
             }
-            
             _richTextBox.ScrollToEnd();
 
         }
@@ -57,10 +58,21 @@ namespace WPFUygulamasiNET6
         public MainWindow()
         {
             InitializeComponent();
+
+            //string ProcessPath = Environment.ProcessPath;
+            string CurrentDirectory = Environment.CurrentDirectory;
+            string Roaming = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string Local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            string Desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string appName = Assembly.GetExecutingAssembly().GetName().Name;
+            string logDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), appName);
+            string logFilePath = Path.Combine(logDirectory, $"{appName}_log.txt");
             Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+            .MinimumLevel.Debug().WriteTo
+            .File(logFilePath, rollingInterval: RollingInterval.Day)
             .CreateLogger();
+            
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
