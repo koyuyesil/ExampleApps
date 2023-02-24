@@ -62,6 +62,7 @@ namespace WPFUygulamasiNET6
             }
             catch (Exception ex)
             {
+                Log.Error("Exception: {Message}", ex.Message);
                 return ex.Message;
             }
 

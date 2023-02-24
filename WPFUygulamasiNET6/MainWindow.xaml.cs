@@ -23,7 +23,7 @@ namespace WPFUygulamasiNET6
 
         public CommandInvoker(System.Windows.Controls.RichTextBox logBox)
         {
-            
+
             _commands = new List<ICommand>();
             _richTextBox = logBox;
         }
@@ -37,7 +37,7 @@ namespace WPFUygulamasiNET6
         {
             foreach (var command in _commands)
             {
-             var result  = await command.ExecuteAsync();
+                var result = await command.ExecuteAsync();
                 Serilog.Log.Information("Komut çıktısı: {Output}", result);
                 var message = new Paragraph();
                 message.Inlines.Add(new Run(result));
@@ -72,7 +72,7 @@ namespace WPFUygulamasiNET6
             .MinimumLevel.Debug().WriteTo
             .File(logFilePath, rollingInterval: RollingInterval.Day)
             .CreateLogger();
-            
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -86,27 +86,45 @@ namespace WPFUygulamasiNET6
         }
         private async void DeviceListing()
         {
-            tbxLogs.AppendText("INFO : " + DateTime.Now + " : ADB Başlatılıyor...");
-            var adbResult = await Cli.Wrap(targetFilePath: "adb").WithArguments("devices").ExecuteBufferedAsync();
-            tbxLogs.AppendText(" :OK" + Environment.NewLine);
-            if (adbResult.ExitCode != 0)
+            try
             {
-                tbxLogs.AppendText(adbResult.StandardError + Environment.NewLine);
-            }
-            else
-            {
-                rbtnStatus.IsChecked = true;
-                List<Dictionary<string, string>> deviceList = new();
-                List<string> devices = adbResult.StandardOutput.Split(Environment.NewLine).ToList();
-                devices.RemoveAll(s => s == string.Empty);
-                devices.RemoveAt(0);
-                devices.ForEach(s => tbxLogs.AppendText(s + Environment.NewLine));
-                devices.ForEach(s =>
+                tbxLogs.AppendText("INFO : " + DateTime.Now + " : ADB Başlatılıyor...");
+                var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("devices").ExecuteBufferedAsync();
+                tbxLogs.AppendText(" :OK" + Environment.NewLine);
+
+                switch (result.ExitCode)
                 {
-                    cmbDevices.Items.Add(s);
-                    var ss = s.Split("\t");
-                    deviceList.Add(new Dictionary<string, string>() { { "DeviceID", ss[0] }, { "Status", ss[1] } });
-                });
+                    case 0:
+                        if (result.StandardOutput == Environment.NewLine)
+                        {
+                            tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " : Please Enable USB Debugging" + Environment.NewLine);
+                        }
+                        else
+                        {
+                            rbtnStatus.IsChecked = true;
+                            List<Dictionary<string, string>> deviceList = new();
+                            List<string> devices = result.StandardOutput.Split(Environment.NewLine).ToList();
+                            devices.RemoveAll(s => s == string.Empty);
+                            devices.RemoveAt(0);
+                            devices.ForEach(s =>
+                            {
+                                var (devID, devStatus) = (s.Split("\t")[0], s.Split("\t")[1]);
+                                tbxLogs.AppendText($"DeviceID: {devID} - Status: {devStatus}{Environment.NewLine}");
+                                cmbDevices.Items.Add($"DeviceID: {devID} - Status: {devStatus}");
+                                deviceList.Add(new Dictionary<string, string>() { { "DeviceID", devID }, { "Status", devStatus } });
+                            });
+                        }
+                        break;
+
+                    default:
+                        tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " :" + result.StandardError + Environment.NewLine);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hata durumunda buraya düşer.
+                tbxLogs.AppendText("ERROR : " + DateTime.Now + " :" + ex.Message + Environment.NewLine);
             }
 
             //var ssss = deviceList[0]["DeviceID"];
@@ -118,28 +136,31 @@ namespace WPFUygulamasiNET6
         private async void cmbDevices_DropDownOpened(object sender, EventArgs e)
         {
             cmbDevices.Items.Clear();
-            DeviceListing();
+            //DeviceListing();
             try
             {
                 var result = await Cli.Wrap(targetFilePath: "adb").WithArguments("reconnect offline").ExecuteBufferedAsync();//offline ve unauthorized aygıtları zorlar
-                if (result.ExitCode != 0)
+                switch (result.ExitCode)
                 {
-                    tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " :" + result.StandardError + Environment.NewLine);
+                    case 0:
+                        tbxLogs.AppendText(result.ExitTime.DateTime + " : Refresh android devices" + result.StandardOutput);
+                        break;
+                    case 1:
+                        tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " : Invalid arguments provided." + Environment.NewLine);
+                        break;
+                    case 2:
+                        tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " : File not found." + Environment.NewLine);
+                        break;
+                    default:
+                        tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " :" + result.StandardError + Environment.NewLine);
+                        break;
                 }
-                if (result.StandardOutput == Environment.NewLine)
-                {
-                    tbxLogs.AppendText("ERROR : " + result.ExitTime.DateTime + " : Please Enable USB Debugging" + Environment.NewLine);
-                }
-                else
-                {
-                    tbxLogs.AppendText(result.ExitTime.DateTime + " : " + result.StandardOutput);//output has new line
-                }
-
             }
             catch (Exception ex)
             {
-                tbxLogs.AppendText(ex.Message + Environment.NewLine);
+                tbxLogs.AppendText("ERROR : " + DateTime.Now + " :" + ex.Message + Environment.NewLine);
             }
+            DeviceListing();
         }
         private void tbxMenuItemLogsClear_Click(object sender, RoutedEventArgs e)
         {
@@ -195,9 +216,9 @@ namespace WPFUygulamasiNET6
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
             var invoker = new CommandInvoker(logBox);
-            invoker.AddCommand(new Command("adb","devices"));
-            invoker.AddCommand(new Command("adb","getprop product"));
-            invoker.AddCommand(new Command("adb","shell dumpsys battery"));
+            invoker.AddCommand(new Command("adb", "devices"));
+            invoker.AddCommand(new Command("adb", "getprop product"));
+            invoker.AddCommand(new Command("adb", "shell dumpsys battery"));
             await invoker.RunAsync();
         }
 
