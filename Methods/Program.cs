@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace Methods
 {
     class Program
     {
@@ -17,7 +17,7 @@ namespace ConsoleApp1
 
         }
 
-         private static void Method()
+        private static void Method()
         {
             Console.WriteLine("1");
             Task.Delay(1000);//async

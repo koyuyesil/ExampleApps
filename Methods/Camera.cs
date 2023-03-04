@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp1
+namespace Methods
 {
     public class Camera
 
@@ -14,7 +14,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Fotoğraf Yakalandı");
             Console.Beep();
-       
+
 
         }
         public static void VideoKaydet()
