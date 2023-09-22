@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFUygulamasiNET6
+namespace SimpleAdbClientNET6
 {
     internal class Commands
     {

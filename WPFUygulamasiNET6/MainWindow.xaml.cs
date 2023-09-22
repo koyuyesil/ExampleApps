@@ -14,7 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 
-namespace WPFUygulamasiNET6
+namespace SimpleAdbClientNET6
 {
     public class CommandInvoker
     {

@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLiblary
+namespace SinifKutuphanesi
 {
-    class Objects
+    class Kutuphane1
     {
     }
-    public class PublicObject
+    public class Kutuphane2
     {
     }
-    internal class InternalObject
+    internal class Kutuphane3
     {
     }
-    abstract class AbstractObject
+    abstract class Kutuphane4
     {
     }
-    public interface IInterface
+    public interface Kutuphane5
     {
 
     }

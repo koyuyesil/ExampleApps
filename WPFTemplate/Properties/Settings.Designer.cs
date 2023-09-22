@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SimpleAdbClientNET6.Properties {
+namespace WPFTemplate.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

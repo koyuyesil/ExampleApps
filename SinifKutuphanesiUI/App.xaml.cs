@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WPFUygulamasi
+namespace SinifKutuphanesiUI
 {
     /// <summary>
     /// App.xaml etkileşim mantığı

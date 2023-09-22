@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLiblary
+namespace SinifKutuphanesi
 {
-    class PrivateObjectTwo
+    class Kutuphane6
     {
-        PrivateObjectTwo()
+        Kutuphane6()
         {
 
         }
@@ -26,7 +26,7 @@ namespace ClassLiblary
         }
 
 
-        public PrivateObjectTwo(int a)//constructor methodu
+        public Kutuphane6(int a)//constructor methodu
         {
             field1 = "field1";
         }

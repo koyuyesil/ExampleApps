@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFUygulamasi
+namespace SinifKutuphanesiUI
 {
     /// <summary>
     /// MainWindow.xaml etkileşim mantığı
@@ -23,8 +23,6 @@ namespace WPFUygulamasi
         public MainWindow()
         {
             InitializeComponent();
-            //int a=1, b=5, toplam=10;
-            //toplam = a + b+toplam;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,7 +41,7 @@ namespace WPFUygulamasi
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Sinif ornek = new Sinif("örsan", "akciyer");
-            ornek.OrnekMethod();
+            ornek.OrnekMethod(true);
         }
     }
 }
