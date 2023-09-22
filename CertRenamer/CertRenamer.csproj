@@ -94,6 +94,27 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Samples\SM-A310F_358979075883036_11-10-2018_12-39-0.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-A710F_355525072515205_30-10-2018_14-38-42.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-G920F_354607071910271_15-12-2018_16-21-4.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-G935F_358982079964646_358983079964644_18-10-2018_13-10-58.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-J320H__R51JB01YNKX_3-10-2018_13-29-32.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-J700F_520320d9e8c4637d_352347083543271_352348083543279_5-10-2018_18-0-29.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\SM-J700F_R28GC1HKT7B_UNKNOWN_21-11-2018_14-38-33.cert">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

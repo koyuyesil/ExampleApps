@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace CertRenamer
 {
@@ -93,10 +94,10 @@ namespace CertRenamer
             OpenFileDialog openFileDialog = new OpenFileDialog();
             Dosyaismi isimal = new Dosyaismi();
             openFileDialog.Multiselect = true;
-            openFileDialog.RestoreDirectory = true;
             openFileDialog.Filter = "Cert|*.cert|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
-            openFileDialog.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            openFileDialog.InitialDirectory = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Samples");
+            openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == true)
             {
                 txtgozat.Text=System.IO.Path.GetDirectoryName(openFileDialog.FileName);//kullanımı doğru mu bilmiyorum çoklu seçimde
