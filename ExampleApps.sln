@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinifKutuphanesiUI", "Sinif
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TimerVB", "Timer\TimerVB.vbproj", "{004E0CBF-AA21-45DF-A955-97EA602D4318}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkScanner", "NetworkScanner\NetworkScanner.csproj", "{562212C6-BEAB-46AD-A66C-B8743AA972BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -601,6 +603,26 @@ Global
 		{004E0CBF-AA21-45DF-A955-97EA602D4318}.Release|x64.Build.0 = Release|Any CPU
 		{004E0CBF-AA21-45DF-A955-97EA602D4318}.Release|x86.ActiveCfg = Release|Any CPU
 		{004E0CBF-AA21-45DF-A955-97EA602D4318}.Release|x86.Build.0 = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|ARM.Build.0 = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|x64.Build.0 = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|ARM.Build.0 = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|ARM64.Build.0 = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|x64.ActiveCfg = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|x64.Build.0 = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{562212C6-BEAB-46AD-A66C-B8743AA972BE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
