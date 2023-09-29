@@ -30,14 +30,13 @@ namespace LicensingGenetator
         string publicKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+aiebBbj+8caQtC5ZH4ynlEq93+Re2MSszc+QdrNxcwMY57WtQE+hDxFtmqdceru4rEytCTBswBokObaBamCdg==";
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            passPhrase.Password = "NebulaApps";
             tbxPrivateKey.Text = privateKey;
             tbxPublicKey.Text = publicKey;
-            //GenerateKeys();
         }
 
-        private void GenerateKeys()
+        private void btnGenerateKeys_Click(object sender, RoutedEventArgs e)
         {
-            passPhrase.Password = "NebulaApps";
             var keyGenerator = Standard.Licensing.Security.Cryptography.KeyGenerator.Create();
             var keyPair = keyGenerator.GenerateKeyPair();
             privateKey = keyPair.ToEncryptedPrivateKeyString(passPhrase.Password);
@@ -70,11 +69,6 @@ namespace LicensingGenetator
             }
             System.IO.File.WriteAllText("Lisans.lic", stdlicense.ToString(), System.Text.Encoding.UTF8);
             System.IO.File.WriteAllText("Public.Key", publicKey, System.Text.Encoding.UTF8);
-        }
-
-        private void btnGenerateKeys_Click(object sender, RoutedEventArgs e)
-        {
-            GenerateKeys();
         }
     }
 }
