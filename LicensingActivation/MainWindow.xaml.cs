@@ -27,7 +27,7 @@ namespace LicensingActivation
         public MainWindow()
         {
             InitializeComponent();
-            var a=GetUrlContentLengthAsync();
+            var a = GetUrlContentLengthAsync();
             bool fileExist = System.IO.File.Exists("Lisans.xml");
             if (fileExist)
             {
@@ -50,11 +50,11 @@ namespace LicensingActivation
                                 .And()
                                 .Signature(publicKey)
                                 .AssertValidLicense();
-            foreach (var failure in validationFailures) 
-            { 
-                MessageBox.Show(failure.GetType().Name + ": " + failure.Message + " - " + failure.HowToResolve,"License Error",MessageBoxButton.OK,MessageBoxImage.Error);  
+            foreach (var failure in validationFailures)
+            {
+                MessageBox.Show(failure.GetType().Name + ": " + failure.Message + " - " + failure.HowToResolve, "License Error", MessageBoxButton.OK, MessageBoxImage.Error);
             };
-            
+
             if (validationFailures.Any())
             {
                 MessageBox.Show("Licence Error", "Standard Licensing Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -66,7 +66,7 @@ namespace LicensingActivation
             };
 
 
-                
+
 
         }
 
