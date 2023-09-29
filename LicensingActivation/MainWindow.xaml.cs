@@ -43,10 +43,10 @@ namespace LicensingActivation
         {
             string xmlString = System.IO.File.ReadAllText("Lisans.lic");
             License license = License.Load(xmlString);
-            var publicKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4KMRfXymlom/pQmuBjfxLBB+5zkOXuEKxsMXjjnRLSvUlB1X8zeHjMjzir6zZfqWl4IuZ4mGnczElbLH3erNHQ==";
+            var publicKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+aiebBbj+8caQtC5ZH4ynlEq93+Re2MSszc+QdrNxcwMY57WtQE+hDxFtmqdceru4rEytCTBswBokObaBamCdg==";
             var validationFailures = license.Validate()
                                 .ExpirationDate()
-                                .When(lic => lic.Type == LicenseType.Trial)
+                                .When(lic => lic.Type == LicenseType.Standard)
                                 .And()
                                 .Signature(publicKey)
                                 .AssertValidLicense();

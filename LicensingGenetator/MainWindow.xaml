@@ -5,21 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LicensingGenetator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="381" Width="541">
+        Title="MainWindow" Height="381" Width="541" Loaded="Window_Loaded">
     <Grid>
         <Label Content="PassPhrase" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label Content="Full Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <Label Content="E-Mail" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <Label Content="Modules" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
         <Label Content="Public Key" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="pwdBox" Margin="132,14,33,0" VerticalAlignment="Top" InputScope="Password" Password="defaultapp"/>
+        <PasswordBox x:Name="passPhrase" Margin="132,14,33,0" VerticalAlignment="Top" InputScope="Password" Password="NebulaApps"/>
         <TextBox x:Name="tbxFullName" Margin="132,45,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="PersonalFullName" Text="Test User"/>
         <TextBox x:Name="tbxEmail" Margin="132,76,33,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="EmailUserName" Text="test@e.mail"/>
         <CheckBox x:Name="cbxQualcomm" Content="Qualcomm Module" Margin="132,108,287,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbxMediatek" Content="Mediatek Module" Margin="275,108,152,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbxRepair" Content="Repair Module" Margin="411,108,33,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbxPublicKey" Margin="132,138,33,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="134"/>
-        <Button x:Name="btnGenerateLicence" Content="Generate License File" Margin="132,277,33,0" VerticalAlignment="Top" Height="47" Click="btnGenerateLicence_Click"/>
+        <TextBox x:Name="tbxPublicKey" Margin="132,138,33,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="65"/>
+        <TextBox x:Name="tbxPrivateKey" Margin="132,208,33,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="64"/>
+        <Button x:Name="btnGenerateLicence" Content="Generate License File" Margin="332,277,33,0" VerticalAlignment="Top" Height="47" Click="btnGenerateLicence_Click"/>
+        <Label Content="Private Key" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnGenerateKeys" Content="Generate Keys" Margin="132,277,233,0" VerticalAlignment="Top" Height="47" Click="btnGenerateKeys_Click"/>
 
     </Grid>
 </Window>
