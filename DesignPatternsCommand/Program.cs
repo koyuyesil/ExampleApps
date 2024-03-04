@@ -3,27 +3,24 @@ using DesignPatternsCommand.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DesignPatternsCommand
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Menu m = new Menu();
             SwitchOnOff cmd_switch = new SwitchOnOff(new Switch());
 
-            Television tv = new Television();       
+            Television tv = new Television();
             PreviousChannel cmd_prev_ch = new PreviousChannel(tv);
             NextChannel cmd_next_ch = new NextChannel(tv);
 
             Android dev = new Android();
             FastbootGetVariables getVariables = new FastbootGetVariables(dev);
             FastbootReboot reboot = new FastbootReboot(dev);
-
 
             m.AddCommand(cmd_switch);
             m.AddCommand(cmd_prev_ch);
@@ -34,7 +31,6 @@ namespace DesignPatternsCommand
         }
     }
 }
-
 
 public class Menu
 {
@@ -49,9 +45,9 @@ public class Menu
     {
         commands.Add(c);
     }
+
     public void CreateMenu()
     {
-
         int s = 0;
         while (s != -1)
         {
@@ -75,6 +71,5 @@ public class Menu
                 Thread.Sleep(2000);
             }
         }
-
     }
 }

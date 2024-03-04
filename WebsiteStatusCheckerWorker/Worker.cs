@@ -1,15 +1,15 @@
-using Microsoft.Extensions.Hosting;
 using System.Net.Http.Headers;
 using System.Reflection;
 
 namespace WebsiteStatusCheckerWorker
 {
     //https://www.youtube.com/watch?v=PzrTiz_NRKA
-    //host ile worker larý birleþtirip istemci yaz 
+    //host ile worker larý birleþtirip istemci yaz
     public class Worker : BackgroundService
     {
         //default
         private readonly ILogger<Worker> _logger;
+
         //added
         private HttpClient httpClient;
 
@@ -24,10 +24,10 @@ namespace WebsiteStatusCheckerWorker
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-
             _logger.LogInformation("{time}: Nebula Qr Hizmeti Baþlatýldý.", DateTimeOffset.Now);
             return base.StartAsync(cancellationToken);
         }
+
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogWarning("{time}: Worker service stopping.", DateTimeOffset.Now);
@@ -37,6 +37,7 @@ namespace WebsiteStatusCheckerWorker
             _logger.LogInformation("{time}: Nebula Qr Hizmeti Durduruldu.", DateTimeOffset.Now);
             return base.StopAsync(cancellationToken);
         }
+
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
@@ -45,7 +46,6 @@ namespace WebsiteStatusCheckerWorker
                 var result2 = await httpClient.GetStringAsync("http://aerospace.com.tr");
                 var a = result.Content.ReadAsStringAsync();
                 var b = httpClient.DefaultRequestHeaders.UserAgent.ToString();
-
 
                 if (result.IsSuccessStatusCode)
                 {
