@@ -7,7 +7,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using TextCopy;
-//bu winexe ve net 6.0 consol olsa exe olur. diğeri ise net 4.8 ile konsol uygulaması
+// Console projesi olarak oluşturulan proje çıkış türü "Windows" ayarlanmıştır ve "Windows Forms" etkinleştirilmiştir.
+// Ancak gizli görünmeis için arayüz yoktur. Command line versiyon SimpleHostConsole projesindedir.
 namespace SimpleHostWindows
 {
     internal class Program
