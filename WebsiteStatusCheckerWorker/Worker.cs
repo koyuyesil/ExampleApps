@@ -17,7 +17,7 @@ namespace WebsiteStatusCheckerWorker
         {
             _logger = logger;
             httpClient = new HttpClient();
-            ProductHeaderValue header = new ProductHeaderValue(("MyAwesomeLibrary"), Assembly.GetExecutingAssembly().GetName().Version?.ToString());
+            ProductHeaderValue header = new ProductHeaderValue(Assembly.GetExecutingAssembly().GetName().Name?.ToString(), Assembly.GetExecutingAssembly().GetName().Version?.ToString());
             ProductInfoHeaderValue userAgent = new ProductInfoHeaderValue(header);
             httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
         }
